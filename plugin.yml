@@ -1,0 +1,9 @@
+name: ThreadExample
+main: haniokasai\threadtest
+version: 2.0.0
+api: [1.4.0]
+load: STARTUP
+author: haniokasai
+authors: [haniokasai,Ogiwara]
+description: Thread Example
+website: https://github.com/haniokasai/PocketMine-Thread
