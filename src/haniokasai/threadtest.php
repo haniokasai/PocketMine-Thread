@@ -22,8 +22,8 @@ class threadtest extends PluginBase implements Listener
         }
 
         //https://github.com/pmmp/PocketMine-MP/blob/master/src/pocketmine/scheduler/AsyncTask.php
-        $job3 = new thread_ex3();
-        $job3->run();
+        $this->getServer()->getScheduler()->scheduleAsyncTask($job3 = new thread_ex3(Server::getInstance()));
+        $this->getServer()->getScheduler()->scheduleAsyncTask($job4 = new thread_ex3(Server::getInstance()));
 
     }
 }
@@ -58,24 +58,32 @@ class thread_ex2 extends Thread
 class thread_ex3 extends AsyncTask
 {
 
+    public function __construct($instance)
+    {
+        $this->instance =$instance;
+    }
+
     public function onRun()
     {
         $bool = true;
         $i=0;
         $time = time();
-        /*while ($bool){
+        while ($bool){
             ++$i;
             if(time()-$time>=15){
                 echo $i;
                 $bool =false;
             }
-        }*/
+        }
         echo $i;
+        echo PHP_EOL."job3 1-2";
+        //$this->instance->getLogger()->notice("job3 1-1"); //not working
+
     }
 
     public function onCompletion(Server $server)
     {
-        echo 2;
-        $server->getLogger()->notice("comp job3!");
+        echo PHP_EOL."job3 2-2";
+        $server->getLogger()->notice("job3 2-1");
     }
 }
